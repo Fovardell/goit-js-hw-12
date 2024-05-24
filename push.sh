@@ -1,4 +1,4 @@
-cd /d/programmersStuf/goit-js-hw-11
+cd /d/programmersStuf/goit-js-hw-12
 git add .
 echo "Введи комміт:"
 read commit_message
