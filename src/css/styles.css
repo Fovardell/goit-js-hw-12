@@ -32,6 +32,7 @@ p {
 	gap: 24px;
 	max-width: 1128px;
 	justify-content: center;
+	scroll-behavior: smooth;
 }
 
 .gallery-item {
@@ -118,15 +119,15 @@ p {
 	display: none;
 }
 .loader {
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	margin: 0 auto;
+	display: block;
 	width: 32px;
 	height: 32px;
-	position: absolute;
+	position: relative;
 	border-radius: 50%;
 	color: #ff9100;
 	animation: fill 1s ease-in infinite alternate;
+	margin-bottom: 30px;
 }
 .loader::before,
 .loader::after {
@@ -153,4 +154,12 @@ p {
 	100% {
 		box-shadow: 0 0 0 10px inset;
 	}
+}
+.load-more {
+	margin: 0 auto;
+	display: block;
+	margin-bottom: 30px;
+}
+.load-more.hidden {
+	display: none;
 }
