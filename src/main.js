@@ -34,7 +34,7 @@ form.addEventListener("submit", (event) => {
 
 	frame.innerHTML = "";
 	loader.classList.remove("hidden");
-
+	loadMore.classList.remove("hidden");
 	querryValue = event.target.querry.value.trim().split(" ").join("+");
 	fetchImages(querryValue).then(res => {
 		if (!res.hits.length) {
