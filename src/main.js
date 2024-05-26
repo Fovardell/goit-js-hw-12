@@ -17,7 +17,7 @@ const selectors = {
 	loadMore: document.querySelector('.load-more'),
 };
 const { form, frame, loader, lightbox, loadMore, card } = selectors;
-export let pageIncrement;
+let pageIncrement;
 let querryValue;
 form.addEventListener("submit", (event) => {
 	event.preventDefault();
@@ -49,7 +49,14 @@ form.addEventListener("submit", (event) => {
 		frame.insertAdjacentHTML("beforeend", renderGallery(res.hits));
 		lightbox.refresh();
 		loadMore.classList.remove("hidden");
-
+		if (Math.ceil(res.totalHits / 15) <= 1) {
+			loadMore.classList.add("hidden");
+			iziToast.info({
+				message: "We're sorry, but you've reached the end of search results.",
+				position: "topRight",
+				timeout: 3500,
+			});
+		}
 	})
 		.catch(error => {
 			console.log(error);
@@ -72,20 +79,17 @@ loadMore.addEventListener("click", () => {
 	loadMore.classList.add("hidden");
 
 	fetchImages(querryValue).then((res) => {
-		if (pageIncrement === Math.ceil(res.totalHits / 15) || Math.ceil(res.totalHits / 15) === 1) {
+		if (pageIncrement === Math.ceil(res.totalHits / 15)) {
 			loader.classList.add("hidden");
+			loadMore.classList.add("hidden");
 			iziToast.info({
 				message: "We're sorry, but you've reached the end of search results.",
 				position: "topRight",
 				timeout: 3500,
 			});
-			loadMore.classList.add("hidden");
-			return;
 		}
-
 		frame.insertAdjacentHTML("beforeend", renderGallery(res.hits));
 		lightbox.refresh();
-		loadMore.classList.remove("hidden");
 		loader.classList.add("hidden");
 
 		window.scrollBy({
@@ -95,6 +99,7 @@ loadMore.addEventListener("click", () => {
 		});
 	}).catch(console.log);
 });
+
 
 async function fetchImages(querryValue) {
 	const respose = await axios.get(`?`, {
