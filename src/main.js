@@ -73,7 +73,6 @@ loadMore.addEventListener("click", () => {
 	const lastArticle = document.querySelector('.img-frame');
 	const cardHeight = lastArticle.getBoundingClientRect().height;
 	const scrollHeight = cardHeight * 2;
-	console.log("мало б працювати");
 	pageIncrement++;
 	loader.classList.remove("hidden");
 	loadMore.classList.add("hidden");
