@@ -91,7 +91,6 @@ loadMore.addEventListener("click", () => {
 		frame.insertAdjacentHTML("beforeend", renderGallery(res.hits));
 		lightbox.refresh();
 		loader.classList.add("hidden");
-
 		window.scrollBy({
 			top: scrollHeight,
 			left: 0,
